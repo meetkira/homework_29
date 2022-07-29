@@ -3,9 +3,11 @@ from django.http import JsonResponse
 # Create your views here.
 
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.viewsets import ModelViewSet
 
-from users.models import User
-from users.serializers import UserSerializer, UserCreateSerializer, UserUpdateSerializer, UserDestroySerializer
+from users.models import User, Location
+from users.serializers import UserSerializer, UserCreateSerializer, UserUpdateSerializer, UserDestroySerializer, \
+    LocationSerializer
 
 
 def index(request):
@@ -35,3 +37,8 @@ class UserUpdateView(UpdateAPIView):
 class UserDeleteView(DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserDestroySerializer
+
+
+class LocationViewSet(ModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
